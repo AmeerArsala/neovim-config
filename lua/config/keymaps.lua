@@ -45,6 +45,20 @@ local function smap(lhs, rhs, opts)
   vim.api.nvim_set_keymap("s", lhs, rhs, options)
 end
 
+-- Arbitrary mode key mapping function
+-- modes: {"i", "n"} to do both insert and normal mode for example
+local function keymap(modes, lhs, rhs, opts)
+  local options = { noremap = true, silent = true }
+
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+
+  for index, value in ipairs(modes) do
+    vim.api.nvim_set_keymap(value, lhs, rhs, options)
+  end
+end
+
 -- Navbuddy
 nmap("<C-k>", "<cmd>Navbuddy<CR>")
 imap("<C-k>", "<Esc><cmd>Navbuddy<CR>")
@@ -87,7 +101,6 @@ local comment_api = require("Comment.api")
 vim.keymap.set("s", "<A-x>", comment_api.call("toggle.linewise", "g@"), { expr = true })
 vim.keymap.set("v", "<A-x>", comment_api.call("toggle.linewise", "g@"), { expr = true })
 --smap("<A-x>", "<C-O>:call novim_mode#EnterSelectionMode('comment')<CR>")
---imap("<A-x>", "<C-O>gc")
 
 -- Fix keys like CTRL+C, CTRL+Z, even CTRL+V
 nmap("<C-z>", "u")
@@ -96,9 +109,76 @@ vmap("<C-c>", '"+y')
 nmap("<C-v>", '"+pi')
 
 -- Low-effort esc (ALT + Q)
---imap("<A-q>", "<Esc>")
+imap("<A-q>", "<Esc>")
 
---TODO: fix getting to the last line with down arrow
---TODO: fix getting to the first line with up arrow
---TODO: fix getting to the end of the previous line with <-
---TODO: fix getting to the start of the next line with ->
+-- Move to end of a line immediately while in insert mode
+-- Actually, who needs this when you got the arrow keys of going to the next line and coming back??? Genius ik
+--imap("<C-;>", "<Esc>$i")
+
+--NOTE: the functions below MUST be global (no local indicator) in order to run in the string commands
+
+-- Will move to the previous line if at the start of a line
+function attempt_move_left()
+  if vim.fn.col(".") ~= 1 then
+    -- Base case: do nothing
+    vim.cmd("normal! h") -- literally just move left
+  else
+    -- Move to end of previous line
+    vim.cmd("normal! k$")
+  end
+end
+
+-- Will move to the next line if at the end of a line
+function attempt_move_right()
+  if vim.fn.col(".") ~= vim.fn.col("$") then
+    -- Base Case
+    vim.cmd("normal! l") -- literally just move right
+  else
+    -- Move to start of next line
+    vim.cmd("normal! j0")
+  end
+end
+
+-- Will move to the start of the line if on the first line
+function attempt_move_up()
+  if vim.fn.line(".") ~= 1 then
+    -- Base Case
+    vim.cmd("normal! k") -- literally just move up
+  else
+    -- Move to the start of the line
+    vim.cmd("normal! 0")
+  end
+end
+
+-- Will move to the end of the line if on the last line
+function attempt_move_down()
+  if vim.fn.line(".") ~= vim.fn.line("$") then
+    -- Base Case
+    vim.cmd("normal! j") -- literally just move down
+  else
+    -- Move to end of the line
+    vim.cmd("normal! $")
+  end
+end
+
+-- NOTE: if all these arrow hax start acting up, comment them out. They are a bit sus
+
+-- Left
+nmap("<Left>", "<cmd>lua attempt_move_left()<CR>")
+imap("<Left>", "<C-O><cmd>lua attempt_move_left()<CR>")
+
+-- Right
+nmap("<Right>", "<cmd>lua attempt_move_right()<CR>")
+imap("<Right>", "<C-O><cmd>lua attempt_move_right()<CR>")
+
+-- Up
+nmap("<Up>", "<cmd>lua attempt_move_up()<CR>")
+imap("<Up>", "<C-O><cmd>lua attempt_move_up()<CR>")
+
+-- Down
+--keymap({ "i", "n" }, "<Down>", "<Down>")
+nmap("<Down>", "<cmd>lua attempt_move_down()<CR>")
+imap("<Down>", "<C-O><cmd>lua attempt_move_down()<CR>")
+
+-- Better suggestions; CTRL + Space behaves like vscode
+--imap("<C-space>", "<C-p>")
