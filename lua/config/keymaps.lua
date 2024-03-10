@@ -82,7 +82,7 @@ nmap("<C-Q>", "<cmd>bprev<CR>")
 imap("<C-H>", "<C-O>:call novim_mode#EnterSelectionMode('left')<CR><C-S-Left><Backspace>", {})
 imap("<C-bs>", "<C-O>:call novim_mode#EnterSelectionMode('left')<CR><C-S-Left><Backspace>", {})
 
--- Mass Commenting
+-- Mass Commenting with ALT+x
 local comment_api = require("Comment.api")
 vim.keymap.set("s", "<A-x>", comment_api.call("toggle.linewise", "g@"), { expr = true })
 vim.keymap.set("v", "<A-x>", comment_api.call("toggle.linewise", "g@"), { expr = true })

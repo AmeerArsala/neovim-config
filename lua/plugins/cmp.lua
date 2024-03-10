@@ -10,6 +10,7 @@ local config = {
     -- "hrsh7th/cmp-nvim-lsp-document-symbol",
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
+    "onsails/lspkind.nvim",
     -- "lukas-reineke/cmp-under-comparator", -- Better sort completion items starting with underscore (Python)
   },
   config = function()
@@ -17,9 +18,9 @@ local config = {
     local _luasnip, luasnip = pcall(require, "luasnip")
     local _lspkind, lspkind = pcall(require, "lspkind")
 
-    if not _cmp or not _lspkind or not _luasnip then
-      return
-    end
+    -- if not _cmp or not _lspkind or not _luasnip then
+    --   return
+    -- end
 
     local has_words_before = function()
       unpack = unpack or table.unpack
@@ -32,17 +33,22 @@ local config = {
 
     cmp.setup({
       preselect = cmp.PreselectMode.Item,
-      -- completion = { autocomplete = false }, -- Make completion only on demand
+      --completion = { autocomplete = true }, -- Make completion only on demand
       enabled = function()
         local in_prompt = vim.api.nvim_buf_get_option(0, "buftype") == "prompt"
         if in_prompt then
           return false
         end
         local context = require("cmp.config.context")
-        return not (context.in_treesitter_capture("comment") == true or context.in_syntax_group("Comment"))
+        return not (
+          context.in_treesitter_capture("comment")
+          or context.in_syntax_group("Comment")
+          or context.in_treesitter_capture("string")
+          or context.in_syntax_group("String")
+        )
       end,
       window = {
-        completion = cmp.config.window.bordered(),
+        --completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
       snippet = {
@@ -86,19 +92,26 @@ local config = {
           end
         end, { "i", "s" }),
 
-        ["<C-K>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
+        -- ["<C-K>"] = cmp.mapping(function(fallback)
+        --   if cmp.visible() then
+        --     cmp.select_prev_item()
+        --   elseif luasnip.jumpable(-1) then
+        --     luasnip.jump(-1)
+        --   else
+        --     fallback()
+        --   end
+        -- end, { "i", "s" }),
+
+        ["<C-Space>"] = cmp.mapping(function(fallback)
+          if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
           else
             fallback()
           end
         end, { "i", "s" }),
-
         --["<C-b>"] = cmp.mapping.scroll_docs(-4),
         --["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
+        --["<C-Space>"] = cmp.mapping.complete(),
         ["<C-i>"] = cmp.mapping.abort(),
         ["<Tab>"] = cmp.mapping.confirm({
           select = true,
@@ -125,4 +138,4 @@ local config = {
   end,
 }
 
-return {}
+return config
