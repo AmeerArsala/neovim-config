@@ -5,4 +5,8 @@ vim.opt.relativenumber = false
 vim.opt.modifiable = true
 vim.opt.winbar = "%=%m %f"
 
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+
+--vim.opt.expandtab = false
 --vim.cmd("colorscheme onedark")

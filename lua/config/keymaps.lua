@@ -64,10 +64,6 @@ nmap("<C-n>", "<cmd>enew<CR>", {})
 -- Fun fact: To open the terminal, it is CTRL + /
 -- if I need a separate terminal tab, it would be :term
 
--- Moving lines (M == ALT)
---imap("<M-Up>", "<C-O>:m -2<CR>")
---imap("<M-Down>", "<C-Down>")
-
 -- Scrolling
 nmap("<C-Up>", "<C-Y>")
 nmap("<C-Down>", "<C-E>")
@@ -86,4 +82,23 @@ nmap("<C-Q>", "<cmd>bprev<CR>")
 imap("<C-H>", "<C-O>:call novim_mode#EnterSelectionMode('left')<CR><C-S-Left><Backspace>", {})
 imap("<C-bs>", "<C-O>:call novim_mode#EnterSelectionMode('left')<CR><C-S-Left><Backspace>", {})
 
---TODO: fix getting to the last line
+-- Mass Commenting
+local comment_api = require("Comment.api")
+vim.keymap.set("s", "<A-x>", comment_api.call("toggle.linewise", "g@"), { expr = true })
+vim.keymap.set("v", "<A-x>", comment_api.call("toggle.linewise", "g@"), { expr = true })
+--smap("<A-x>", "<C-O>:call novim_mode#EnterSelectionMode('comment')<CR>")
+--imap("<A-x>", "<C-O>gc")
+
+-- Fix keys like CTRL+C, CTRL+Z, even CTRL+V
+nmap("<C-z>", "u")
+vmap("<C-z>", "u")
+vmap("<C-c>", '"+y')
+nmap("<C-v>", '"+pi')
+
+-- Low-effort esc (ALT + Q)
+--imap("<A-q>", "<Esc>")
+
+--TODO: fix getting to the last line with down arrow
+--TODO: fix getting to the first line with up arrow
+--TODO: fix getting to the end of the previous line with <-
+--TODO: fix getting to the start of the next line with ->

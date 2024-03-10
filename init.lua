@@ -1,2 +1,26 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
+
+-- require("nvim-treesitter.configs").setup({
+--   ensure_installed = "all", -- or a list of languages you want to install
+--   highlight = {
+--     enable = true, -- Enable syntax highlighting
+--   },
+--   indent = {
+--     enable = true, -- Enable indentation
+--   },
+-- Add other modules you want to enable
+-- modules = {
+--   -- You can enable or disable specific modules here
+--   -- For example, to enable the highlight and indent modules:
+--   highlight = {
+--     enable = true,
+--   },
+--   indent = {
+--     enable = true,
+--   },
+-- },
+-- sync_install = true, -- Enable synchronous installation of parsers
+-- ignore_install = {}, -- List of languages to ignore during installation
+-- auto_install = true, -- Automatically install parsers
+-- })
