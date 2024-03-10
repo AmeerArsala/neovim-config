@@ -84,5 +84,6 @@ nmap("<C-Q>", "<cmd>bprev<CR>")
 
 -- Fix CTRL + Backspace
 imap("<C-H>", "<C-O>:call novim_mode#EnterSelectionMode('left')<CR><C-S-Left><Backspace>", {})
+imap("<C-bs>", "<C-O>:call novim_mode#EnterSelectionMode('left')<CR><C-S-Left><Backspace>", {})
 
 --TODO: fix getting to the last line
