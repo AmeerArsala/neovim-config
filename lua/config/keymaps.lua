@@ -46,8 +46,8 @@ local function smap(lhs, rhs, opts)
 end
 
 -- Navbuddy
-nmap("<C-p>", "<cmd>Navbuddy<CR>")
-imap("<C-p>", "<Esc><cmd>Navbuddy<CR>")
+nmap("<C-k>", "<cmd>Navbuddy<CR>")
+imap("<C-k>", "<Esc><cmd>Navbuddy<CR>")
 
 -- Arrow keys more natural in normal mode
 nmap("<C-Right>", "<S-Right>", {})
