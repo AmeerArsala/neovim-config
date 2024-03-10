@@ -162,3 +162,50 @@ lspconfig.pyright.setup({
     },
   },
 })
+
+-- UI Plugins
+
+local colors = require("tokyonight.colors").setup()
+
+require("scrollbar").setup({
+  handle = {
+    color = colors.bg_highlight,
+  },
+  marks = {
+    Cursor = {
+      text = "*",
+      priority = 0,
+      gui = nil,
+      color = nil,
+      cterm = nil,
+      color_nr = nil, -- cterm
+      highlight = "Normal",
+    },
+    Search = { color = colors.orange },
+    Error = {
+      color = colors.error,
+    },
+    Warn = {
+      color = nil --[[colors.warning]],
+    },
+    Info = {
+      color = nil --[[colors.info]],
+    },
+    Hint = {
+      color = nil --[[colors.hint]],
+    },
+    Misc = {
+      color = nil --[[colors.purple]],
+    },
+  },
+  handlers = {
+    cursor = false,
+    --diagnostic = false,
+  },
+})
+
+-- require("ufo").setup({
+--   provider_selector = function(bufnr, filetype, buftype)
+--     return { "treesitter", "indent" }
+--   end,
+-- })
