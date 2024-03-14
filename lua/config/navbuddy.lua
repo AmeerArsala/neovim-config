@@ -1,6 +1,4 @@
-local navbuddy = require("nvim-navbuddy")
-
-navbuddy.setup = {
+require("nvim-navbuddy").setup({
   window = {
     border = "single", -- "rounded", "double", "solid", "none"
     -- or an array with eight chars building up the border in a clockwise fashion
@@ -26,4 +24,4 @@ navbuddy.setup = {
       },
     },
   },
-}
+})

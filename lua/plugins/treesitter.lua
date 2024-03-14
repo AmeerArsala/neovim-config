@@ -6,7 +6,7 @@ local cfg = {
     "windwp/nvim-ts-autotag",
     "nvim-treesitter/nvim-treesitter-refactor",
     "nvim-treesitter/playground", -- View treesitter information directly in Neovim
-    "andymass/vim-matchup",
+    --"andymass/vim-matchup",
   },
   build = ":TSUpdate",
   config = function()
@@ -20,6 +20,9 @@ local cfg = {
     require("nvim-treesitter.configs").setup({
       autotag = {
         enable = true,
+      },
+      highlight = {
+        enable = true, -- Enable syntax highlighting
       },
       indent = {
         enable = true,
@@ -198,4 +201,4 @@ local cfg = {
   end,
 }
 
-return {}
+return cfg

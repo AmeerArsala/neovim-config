@@ -103,10 +103,15 @@ vim.keymap.set("v", "<A-x>", comment_api.call("toggle.linewise", "g@"), { expr =
 --smap("<A-x>", "<C-O>:call novim_mode#EnterSelectionMode('comment')<CR>")
 
 -- Fix keys like CTRL+C, CTRL+Z, even CTRL+V
+-- keymap({ "n", "v", "s" }, "<C-z>", "u")
+-- keymap({ "v" }, "<C-c>", '"+y')
+-- keymap({ "n", "v", "s" }, "<C-v>", '"+pi')
 nmap("<C-z>", "u")
 vmap("<C-z>", "u")
 vmap("<C-c>", '"+y')
 nmap("<C-v>", '"+pi')
+
+--TODO: fix the bug where backspace/delete on selection copies it
 
 -- Low-effort esc (ALT + Q)
 imap("<A-q>", "<Esc>")
