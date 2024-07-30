@@ -19,6 +19,17 @@ end
 -- Navbuddy fix
 keymap({ "i" }, "<C-k>", "<Esc><cmd>Navbuddy<CR>")
 
+-- Configure telescope here since I'm lazy
+require("telescope").setup({
+  defaults = {
+    file_ignore_patterns = {
+      "node_modules/.*", -- Ignore everything under node_modules
+      ".git/.*", -- Ignore everything under .git
+      ".pixi/.*", -- Ignore everything under .pixi
+    },
+  },
+})
+
 -- UI Plugins
 
 local colors = require("tokyonight.colors").setup()
