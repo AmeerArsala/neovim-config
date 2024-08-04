@@ -43,6 +43,8 @@ end
 local python_path = get_python_path()
 vim.notify("Python Path: " .. python_path)
 
+vim.g.python3_host_prog = vim.fn.expand(python_path)
+
 return {
   -- Add `pyright` to mason
   -- TODO: check following tools -> mypy types-requests types-docutils

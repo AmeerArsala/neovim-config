@@ -1,6 +1,9 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
+
 -- Don't make a habit of using this function in this file
 -- Arbitrary mode key mapping function
 -- modes: {"i", "n"} to do both insert and normal mode for example
@@ -40,6 +43,7 @@ require("telescope").setup({
 -- UI Plugins
 
 local colors = require("tokyonight.colors").setup()
+vim.cmd([[colorscheme tokyonight-moon]])
 
 require("scrollbar").setup({
   handle = {
@@ -83,3 +87,5 @@ require("scrollbar").setup({
 --     return { "treesitter", "indent" }
 --   end,
 -- })
+
+--require("plugins.molten").init()
