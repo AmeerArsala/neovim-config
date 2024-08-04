@@ -22,7 +22,7 @@ return {
     keys = {
       {
         mode = { "n", "v" },
-        "<C-s>",
+        "<C-;>",
         function()
           require("harpoon.mark").add_file()
         end,
@@ -30,7 +30,7 @@ return {
       },
       {
         mode = { "n", "v" },
-        "<C-f>",
+        "<C-'>",
         function()
           require("harpoon.ui").toggle_quick_menu(vim.api.nvim_buf_get_name(0))
         end,
@@ -39,28 +39,28 @@ return {
 
       {
         mode = { "n" },
-        "<C-h>",
+        "<C-1>",
         function()
           require("harpoon.ui").nav_file(1)
         end,
       },
       {
         mode = { "n" },
-        "<C-j>",
+        "<C-2>",
         function()
           require("harpoon.ui").nav_file(2)
         end,
       },
       {
         mode = { "n" },
-        "<C-k>",
+        "<C-3>",
         function()
           require("harpoon.ui").nav_file(3)
         end,
       },
       {
         mode = { "n" },
-        "<C-l>",
+        "<C-4>",
         function()
           require("harpoon.ui").nav_file(4)
         end,

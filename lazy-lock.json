@@ -21,7 +21,6 @@
   "draculanight": { "branch": "master", "commit": "01ae300db1dc6fac0f9825cbdeffc4b51e79ca4d" },
   "dressing.nvim": { "branch": "master", "commit": "6741f1062d3dc6e4755367a7e9b347b553623f04" },
   "everblush": { "branch": "main", "commit": "9a0e695fdd57b340d3ba2b72406e3ca519029f25" },
-  "firenvim": { "branch": "master", "commit": "bb70728c13c305ff35193586d5f6ce68668af063" },
   "flash.nvim": { "branch": "main", "commit": "34c7be146a91fec3555c33fe89c7d643f6ef5cf1" },
   "flit.nvim": { "branch": "main", "commit": "a9be4e76c30a128f1e51af448c8321bf8366bcd4" },
   "flow": { "branch": "main", "commit": "1e0725049b6e0058c91aa92a3c335b72b1a44b79" },
