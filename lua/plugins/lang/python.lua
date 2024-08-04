@@ -1,6 +1,6 @@
 -- Function to execute a shell command and return its output
 function execute_command(command)
-  local handle = io.popen(command)
+  local handle = io.popen(command, "r")
   local result = handle:read("*a")
   handle:close()
   return result
@@ -21,14 +21,22 @@ end
 
 -- Function to get the path to the active micromamba environment
 function get_python_path()
-  local active_micromamba_env_name = get_active_micromamba_env()
-  if active_micromamba_env_name == nil then
-    return "/usr/bin/python3"
-  end
-  -- Otherwise, it is a micromamba environment
-  local mamba_root_prefix = os.getenv("MAMBA_ROOT_PREFIX")
-  local active_env_path = mamba_root_prefix .. "/envs/" .. active_micromamba_env_name .. "/bin/python"
-  return active_env_path
+  return execute_command("which python | tr -d '\n'")
+  -- local active_micromamba_env_name = get_active_micromamba_env()
+  --
+  -- if active_micromamba_env_name == nil then
+  --   -- It's not a micromamba environment
+  --   return execute_command("which python | tr -d '\n'")
+  -- end
+  -- -- Otherwise, it is a micromamba environment
+  -- local mamba_root_prefix = os.getenv("MAMBA_ROOT_PREFIX")
+  -- local active_env_path = mamba_root_prefix .. "/envs/" .. active_micromamba_env_name .. "/bin/python"
+  -- --vim.notify(active_env_path)
+  --
+  -- --local equality = fetched_python_path == active_env_path
+  -- --print("Paths are equal: " .. tostring(equality))
+  --
+  -- return active_env_path
 end
 
 -- Get the path to the active python environment
@@ -72,9 +80,9 @@ return {
   {
     "folke/which-key.nvim",
     optional = true,
-    opts = {
+    spec = {
       defaults = {
-        ["<leader>dP"] = { name = "+Python" },
+        { "<leader>dP", group = "Python" },
       },
     },
   },
@@ -159,7 +167,7 @@ return {
           require("lazyvim.util").lsp.on_attach(function(client, _)
             if client.name == "pyright" then
               -- disable hover in favor of jedi-language-server
-              client.server_capabilities.hoverProvider = false
+              -- client.server_capabilities.hoverProvider = false
             end
           end)
         end,
