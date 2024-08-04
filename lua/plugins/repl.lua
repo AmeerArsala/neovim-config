@@ -1,3 +1,8 @@
+-- Molten.nvim can be configured later
+if true then
+  return {}
+end
+
 -- this is the file for repl like functionality in code
 -- quarto.nvim is kinda related, as it lets me edit jupyter notebook type files, but that has it's
 -- own config file
