@@ -69,7 +69,12 @@ nmap("<C-Left>", "<S-Left>", {})
 
 -- Mapping for CTRL + W (close the currently open tab)
 imap("<C-w>", "<Esc><cmd>bd<CR>", {})
-nmap("<C-w>", "<cmd>bd<CR>", {})
+--nmap("<C-w>", "<cmd>bd<CR>", { ttimeout = true })
+
+--vim.keymap.set('n', '<leader>', ':set ttimeout<CR>', {expr = true})
+
+--nmap("<C-w>[char]", "", {})
+--nmap("<C-\\>", "<cmd>bd<CR>", {})
 
 -- Mapping for CTRL + N (new buffer/tab)
 imap("<C-n>", "<Esc><cmd>enew<CR>", {})
@@ -111,7 +116,7 @@ vmap("<C-z>", "u")
 vmap("<C-c>", '"+y')
 nmap("<C-v>", '"+pi')
 
---TODO: fix the bug where backspace/delete on selection copies it
+-- TODO: fix the bug where backspace/delete on selection copies it
 
 -- Low-effort esc (ALT + Q)
 imap("<A-q>", "<Esc>")
@@ -120,7 +125,7 @@ imap("<A-q>", "<Esc>")
 -- Actually, who needs this when you got the arrow keys of going to the next line and coming back??? Genius ik
 --imap("<C-;>", "<Esc>$i")
 
---NOTE: the functions below MUST be global (no local indicator) in order to run in the string commands
+-- NOTE: the functions below MUST be global (no local indicator) in order to run in the string commands
 
 -- Will move to the previous line if at the start of a line
 function attempt_move_left()
