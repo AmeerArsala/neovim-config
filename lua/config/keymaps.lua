@@ -121,6 +121,12 @@ nmap("<C-v>", '"+pi')
 -- Low-effort esc (ALT + Q)
 imap("<A-q>", "<Esc>")
 
+-- Unbind some of these
+-- nmap("<A-k>", "<leader>wk")
+-- imap("<A-k>", "<Esc><leader>wki")
+-- nmap("<A-j>", "<leader>wj")
+-- imap("<A-j>", "<Esc><leader>wki")
+
 -- Move to end of a line immediately while in insert mode
 -- Actually, who needs this when you got the arrow keys of going to the next line and coming back??? Genius ik
 --imap("<C-;>", "<Esc>$i")
